@@ -1,3 +1,4 @@
+// JWT utility for token generation and validation
 package com.incubyte.sweetshop.security;
 
 import io.jsonwebtoken.*;
