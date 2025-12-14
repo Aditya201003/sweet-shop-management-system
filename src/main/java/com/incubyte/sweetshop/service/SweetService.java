@@ -17,5 +17,7 @@ public interface SweetService {
 
     SweetResponse restock(Long id, int quantity);
 
+    SweetResponse updateSweet(Long id, SweetRequest request);
+
     void delete(Long id);
 }

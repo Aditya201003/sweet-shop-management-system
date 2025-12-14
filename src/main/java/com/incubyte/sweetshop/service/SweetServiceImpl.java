@@ -37,6 +37,20 @@ public class SweetServiceImpl implements SweetService {
     }
 
     @Override
+    public SweetResponse updateSweet(Long id, SweetRequest request) {
+        Sweet sweet = sweetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sweet not found"));
+
+        sweet.setName(request.getName());
+        sweet.setCategory(request.getCategory());
+        sweet.setPrice(request.getPrice());
+        sweet.setQuantity(request.getQuantity());
+
+        return toResponse(sweetRepository.save(sweet));
+    }
+
+
+    @Override
     public List<SweetResponse> search(String name, String category, Double min, Double max) {
 
         String safeName = (name == null || name.isBlank())

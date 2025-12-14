@@ -23,6 +23,16 @@ public class SweetController {
         return ResponseEntity.ok(sweetService.addSweet(request));
     }
 
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<SweetResponse> update(
+            @PathVariable Long id,
+            @RequestBody SweetRequest request
+    ) {
+        return ResponseEntity.ok(sweetService.updateSweet(id, request));
+    }
+
+
     @GetMapping
     public ResponseEntity<List<SweetResponse>> getAll() {
         return ResponseEntity.ok(sweetService.getAllSweets());
