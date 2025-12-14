@@ -38,11 +38,21 @@ public class SweetServiceImpl implements SweetService {
 
     @Override
     public List<SweetResponse> search(String name, String category, Double min, Double max) {
-        return sweetRepository.search(name, category, min, max)
+
+        String safeName = (name == null || name.isBlank())
+                ? null
+                : name.toLowerCase();
+
+        String safeCategory = (category == null || category.isBlank())
+                ? null
+                : category.toLowerCase();
+
+        return sweetRepository.search(safeName, safeCategory, min, max)
                 .stream()
                 .map(this::toResponse)
                 .toList();
     }
+
 
     @Override
     public SweetResponse purchase(Long id) {
